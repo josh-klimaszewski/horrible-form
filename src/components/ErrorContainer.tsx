@@ -32,12 +32,13 @@ const ErrorContainer: FC = () => {
     <Grid container={true} spacing={3} classes={{ root: errorContainer }}>
       {metaErrors.map(({ error, clean }, index) => (
         <Slide
+          key={index}
           in={true}
           direction="left"
           mountOnEnter={true}
           unmountOnExit={true}
         >
-          <Grid item={true} key={index} xs={12}>
+          <Grid item={true} xs={12}>
             <Typography
               variant="subtitle1"
               classes={{ root: clean ? cleanError : dirtyError }}
