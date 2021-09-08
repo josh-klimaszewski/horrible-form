@@ -32,7 +32,7 @@ const validation = Yup.object().shape({
     .matches(/(?=.*?[0-9])/, "Must contain a digit")
     .matches(/(?=.*?[#?!@$%^&*-])/, "Must contain a special character")
     .matches(
-      /^[0-9a-z].*[0-9a-z]$/,
+      /^[0-9a-z].*[0-9a-z]$/i,
       "Special characters cannot be at the beginning or end"
     ),
 });
