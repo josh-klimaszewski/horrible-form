@@ -19,31 +19,33 @@ export const useHorribleErrors = () => {
 
   useEffect(() => {
     // clear name errors except required if no name in values
-
-    if (metaErrors.some((e) => e.name === "name") && values && !values.name) {
-      setMetaErrors(
-        metaErrors.filter(
-          (e) => e.name !== "name" || e.error.includes("required")
-        )
-      );
+    if (errors !== prevErrors) {
+      if (metaErrors.some((e) => e.name === "name") && values && !values.name) {
+        setMetaErrors(
+          metaErrors.filter(
+            (e) => e.name !== "name" || e.error.includes("required")
+          )
+        );
+      }
     }
-  }, [metaErrors, values]);
+  }, [metaErrors, values, errors, prevErrors]);
 
   useEffect(() => {
     // clear password errors except required if no password in values
-
-    if (
-      metaErrors.some((e) => e.name === "password") &&
-      values &&
-      !values.password
-    ) {
-      setMetaErrors(
-        metaErrors.filter(
-          (e) => e.name !== "password" || e.error.includes("required")
-        )
-      );
+    if (errors !== prevErrors) {
+      if (
+        metaErrors.some((e) => e.name === "password") &&
+        values &&
+        !values.password
+      ) {
+        setMetaErrors(
+          metaErrors.filter(
+            (e) => e.name !== "password" || e.error.includes("required")
+          )
+        );
+      }
     }
-  }, [metaErrors, values]);
+  }, [metaErrors, values, errors, prevErrors]);
 
   useEffect(() => {
     // if errors change, compare to meta errors
