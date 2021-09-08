@@ -1,10 +1,9 @@
-import React, { FC } from "react";
-import "./App.css";
+import { FC } from "react";
 import { Container } from "@material-ui/core";
-import { makeStyles, DefaultTheme } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import HorribleForm from "./components/HorribleForm";
 
-const useStyles = makeStyles((theme: DefaultTheme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     minHeight: "100vh",
     display: "flex",

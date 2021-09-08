@@ -9,7 +9,6 @@ const ComposedTextField: FC<FieldProps & TextFieldProps> = ({
 }) => {
   const error = getIn(errors, name);
   const isTouched = getIn(touched, name);
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(event);
   };

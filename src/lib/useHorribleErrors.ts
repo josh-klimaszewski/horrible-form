@@ -34,7 +34,7 @@ export const useHorribleErrors = () => {
               (e) => e.name !== "password" || e.error.includes("required")
             )
             .map((e) =>
-              e.error.includes("required") ? { ...e, clean: false } : e
+              e.error.includes("required") && e.name === "password" ? { ...e, clean: false } : e
             )
         );
       } else {
