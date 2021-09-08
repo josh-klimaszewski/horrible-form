@@ -2,7 +2,7 @@
   "name": "horrible-form",
   "version": "0.1.0",
   "private": true,
-  "website": "https://josh-klimaszewski.github.io/horrible-form/",
+  "homepage": "https://josh-klimaszewski.github.io/horrible-form/",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
