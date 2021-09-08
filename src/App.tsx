@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC } from "react";
+import "./App.css";
+import { Container } from "@material-ui/core";
+import { makeStyles, DefaultTheme } from "@material-ui/styles";
+import HorribleForm from "./components/HorribleForm";
 
-function App() {
+const useStyles = makeStyles((theme: DefaultTheme) => ({
+  container: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
+
+const App: FC = () => {
+  const { container } = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className={container}>
+      <HorribleForm />
+    </Container>
   );
-}
+};
 
 export default App;
