@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import ComposedTextField from "./ComposedTextField";
 import { useHorribleErrors } from "../lib/useHorribleErrors";
 import ErrorContainer from "./ErrorContainer";
+import SubmitButton from "./SubmitButton";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -50,46 +51,33 @@ const HorribleForm: FC = () => {
       initialValues={{ name: "", password: "" }}
       onSubmit={() => alert("you did it!")}
     >
-      {({ submitForm }) => (
-        <Paper classes={{ root: paper }}>
-          <Grid container={true} spacing={3}>
-            <Grid item={true} xs={12} md={6}>
-              <Grid container={true} spacing={3}>
-                <Grid item={true} xs={12}>
-                  <Typography variant="h4">Horrible Form</Typography>
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Field
-                    name="name"
-                    label="Name"
-                    component={ComposedTextField}
-                  />
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Field
-                    name="password"
-                    label="Password"
-                    component={ComposedTextField}
-                  />
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth={true}
-                    onClick={submitForm}
-                  >
-                    Submit
-                  </Button>
-                </Grid>
+      <Paper classes={{ root: paper }}>
+        <Grid container={true} spacing={3}>
+          <Grid item={true} xs={12} md={6}>
+            <Grid container={true} spacing={3}>
+              <Grid item={true} xs={12}>
+                <Typography variant="h4">Horrible Form</Typography>
+              </Grid>
+              <Grid item={true} xs={12}>
+                <Field name="name" label="Name" component={ComposedTextField} />
+              </Grid>
+              <Grid item={true} xs={12}>
+                <Field
+                  name="password"
+                  label="Password"
+                  component={ComposedTextField}
+                />
+              </Grid>
+              <Grid item={true} xs={12}>
+                <SubmitButton />
               </Grid>
             </Grid>
-            <Grid item={true} xs={12} md={6}>
-              <ErrorContainer />
-            </Grid>
           </Grid>
-        </Paper>
-      )}
+          <Grid item={true} xs={12} md={6}>
+            <ErrorContainer />
+          </Grid>
+        </Grid>
+      </Paper>
     </Formik>
   );
 };
