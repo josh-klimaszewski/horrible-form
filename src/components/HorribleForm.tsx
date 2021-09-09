@@ -1,12 +1,5 @@
 import { FC } from "react";
-import {
-  Button,
-  Grid,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from "@material-ui/core";
+import { Grid, makeStyles, Paper, Theme, Typography } from "@material-ui/core";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import ComposedTextField from "./ComposedTextField";
@@ -35,11 +28,17 @@ const validation = Yup.object().shape({
       /^[0-9a-z].*[0-9a-z]$/i,
       "Special characters cannot be at the beginning or end"
     ),
+  confirmPassword: Yup.string().test(
+    "is-same-as-password",
+    "Passwords must match",
+    (value, context) => value === context.parent["password"]
+  ),
 });
 
 export type FormValues = {
   name: string;
   password: string;
+  confirmPassword: string;
 };
 
 const HorribleForm: FC = () => {
@@ -48,7 +47,7 @@ const HorribleForm: FC = () => {
   return (
     <Formik<FormValues>
       validationSchema={validation}
-      initialValues={{ name: "", password: "" }}
+      initialValues={{ name: "", password: "", confirmPassword: "" }}
       onSubmit={() => alert("you did it!")}
     >
       <Paper classes={{ root: paper }}>
@@ -65,6 +64,13 @@ const HorribleForm: FC = () => {
                 <Field
                   name="password"
                   label="Password"
+                  component={ComposedTextField}
+                />
+              </Grid>
+              <Grid item={true} xs={12}>
+                <Field
+                  name="confirmPassword"
+                  label="Confirm password"
                   component={ComposedTextField}
                 />
               </Grid>
