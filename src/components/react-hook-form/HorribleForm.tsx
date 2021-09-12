@@ -27,7 +27,7 @@ const HorribleForm: FC = () => {
 
   const methods = useForm<FormValues>({
     defaultValues,
-    mode: "onChange",
+    mode: "all",
     resolver: yupResolver(validation),
   });
   const { handleSubmit, control } = methods;

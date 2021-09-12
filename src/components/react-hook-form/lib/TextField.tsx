@@ -4,6 +4,7 @@ import get from "lodash/get";
 
 type Props<T> = TextFieldProps & {
   control: Control<T>;
+  dataTestId?: string;
 };
 
 const TextField = <
@@ -12,23 +13,46 @@ const TextField = <
   name,
   label,
   control,
-}: Props<TFormValues>) => (
-  <Controller<TFormValues, any>
-    name={name}
-    control={control}
-    render={({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
-      <MuiTextField
-        helperText={get(error, "message")}
-        error={!!error}
-        onChange={onChange}
-        onBlur={onBlur}
-        value={value}
-        fullWidth={true}
-        label={label}
-        variant="outlined"
-      />
-    )}
-  />
-);
+  disabled,
+  dataTestId = `${name}-text-input`,
+  fullWidth = true,
+  ...other
+}: Props<TFormValues>) => {
+  return (
+    <Controller<TFormValues, any>
+      name={name}
+      control={control}
+      render={({
+        field: { onChange, value, onBlur },
+        fieldState: { error },
+      }) => (
+        <MuiTextField
+          {...other}
+          id={name}
+          name={name}
+          label={label}
+          value={value}
+          disabled={disabled}
+          error={!!error}
+          helperText={get(error, "message")}
+          onChange={onChange}
+          onBlur={onBlur}
+          fullWidth={fullWidth}
+          variant="outlined"
+          FormHelperTextProps={{
+            // @ts-ignore
+            "data-testid": `${name}-helper-text`,
+          }}
+          inputProps={{
+            "data-testid": dataTestId,
+            "aria-disabled": disabled ?? false,
+            "aria-label": label as string,
+            "aria-describedby": other["aria-describedby"],
+          }}
+        />
+      )}
+    />
+  );
+};
 
 export default TextField;
