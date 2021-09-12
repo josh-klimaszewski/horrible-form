@@ -4,14 +4,30 @@ import { useFormContext } from "react-hook-form";
 import get from "lodash/get";
 import { MetaError } from "../../../lib/types";
 
+// TODO: find real type
+// type CastErrors = Record<
+//   keyof FormValues,
+//   { message: string; name: { ref: { name: string } } }
+// >;
+
 export const useHorribleErrors = () => {
   const {
     formState: { errors },
   } = useFormContext();
   const [metaErrors, setMetaErrors] = useState<MetaError[]>([]);
 
+  // const castErrors = errors as CastErrors;
+  // const prevErrors = usePrevious(errors);
+
+  // const handleAllErrors = useCallback(
+  //   (errors: CastErrors, prevErrors: CastErrors) => {
+  //     // TODO: evaluate everything in one effect
+  //   },
+  //   [metaErrors]
+  // );
+
   const handleErrors = useCallback(
-    (name: string, error: string, prevError: string) => {
+    (name: string, error?: string, prevError?: string) => {
       if (!!(error || prevError) && error !== prevError) {
         const newMetaErrors = [...metaErrors];
 
