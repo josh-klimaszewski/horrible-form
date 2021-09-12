@@ -1,9 +1,9 @@
 import { Grid, makeStyles, Theme, Typography, Slide } from "@material-ui/core";
 import { FC } from "react";
-import { useHorribleErrors } from "../lib/useHorribleErrors";
 import { green, red } from "@material-ui/core/colors";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
+import { MetaError } from "./types";
 
 const useStyles = makeStyles((theme: Theme) => ({
   errorContainer: {
@@ -24,9 +24,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ErrorContainer: FC = () => {
+type Props = { metaErrors: MetaError[] };
+
+const ErrorRenderer: FC<Props> = ({ metaErrors }) => {
   const { errorContainer, dirtyError, cleanError, icon } = useStyles();
-  const metaErrors = useHorribleErrors();
 
   return (
     <Grid container={true} spacing={3} classes={{ root: errorContainer }}>
@@ -59,4 +60,4 @@ const ErrorContainer: FC = () => {
   );
 };
 
-export default ErrorContainer;
+export default ErrorRenderer;
