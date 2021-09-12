@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = { metaErrors: MetaError[] };
 
 const convertWhiteSpaceToTestId = (label: string): string =>
-  label.replaceAll(" ", "-").toLowerCase();
+  label.replace(/\s/g, "-").toLowerCase();
 
 const ErrorRenderer: FC<Props> = ({ metaErrors }) => {
   const { errorContainer, dirtyError, cleanError, icon } = useStyles();
