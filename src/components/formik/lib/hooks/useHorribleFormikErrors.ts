@@ -1,7 +1,7 @@
-import { FormValues } from "./../components/HorribleForm";
 import { FormikErrors, useFormikContext } from "formik";
-import { usePrevious } from "./usePrevious";
+import { usePrevious } from "../../../../lib/hooks/usePrevious";
 import { useEffect, useState } from "react";
+import { FormValues } from "../../../../lib/types";
 
 type MetaError = {
   name: string;
@@ -9,7 +9,7 @@ type MetaError = {
   clean: boolean;
 };
 
-export const useHorribleErrors = () => {
+export const useHorribleFormikErrors = () => {
   const formikContext = useFormikContext<FormValues>();
   const values = formikContext?.values;
   const errors = formikContext?.errors;
@@ -34,7 +34,9 @@ export const useHorribleErrors = () => {
               (e) => e.name !== "password" || e.error.includes("required")
             )
             .map((e) =>
-              e.error.includes("required") && e.name === "password" ? { ...e, clean: false } : e
+              e.error.includes("required") && e.name === "password"
+                ? { ...e, clean: false }
+                : e
             )
         );
       } else {

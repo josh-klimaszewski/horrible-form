@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import HorribleForm from "./components/HorribleForm";
+import HorribleForm from "./components/react-hook-form/HorribleForm";
 
 const useStyles = makeStyles(() => ({
   container: {

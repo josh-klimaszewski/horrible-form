@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Grid, makeStyles, Paper, Theme, Typography } from "@material-ui/core";
 import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import ComposedTextField from "./ComposedTextField";
-import { useHorribleErrors } from "../lib/useHorribleErrors";
-import ErrorContainer from "./ErrorContainer";
-import SubmitButton from "./SubmitButton";
+import ComposedTextField from "./lib/ComposedTextField";
+import SubmitButton from "../../lib/SubmitButton";
+import FormikErrorContainer from "./FormikErrorContainer";
+import { validation } from "../../lib/utils";
+import { FormValues } from "../../lib/types";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -15,35 +15,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const validation = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(8, "Must contain at least 8 characters")
-    .matches(/(?=.*?[A-Z])/, "Must contain an uppercase letter")
-    .matches(/(?=.*?[a-z])/, "Must contain a lowercase letter")
-    .matches(/(?=.*?[0-9])/, "Must contain a digit")
-    .matches(/(?=.*?[#?!@$%^&*-])/, "Must contain a special character")
-    .matches(
-      /^[0-9a-z].*[0-9a-z]$/i,
-      "Special characters cannot be at the beginning or end"
-    ),
-  confirmPassword: Yup.string().test(
-    "is-same-as-password",
-    "Passwords must match",
-    (value, context) => value === context.parent["password"]
-  ),
-});
-
-export type FormValues = {
-  name: string;
-  password: string;
-  confirmPassword: string;
-};
-
 const HorribleForm: FC = () => {
   const { paper } = useStyles();
-  useHorribleErrors();
   return (
     <Formik<FormValues>
       validationSchema={validation}
@@ -80,7 +53,7 @@ const HorribleForm: FC = () => {
             </Grid>
           </Grid>
           <Grid item={true} xs={12} md={6}>
-            <ErrorContainer />
+            <FormikErrorContainer />
           </Grid>
         </Grid>
       </Paper>
